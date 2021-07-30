@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
     EditText et;
     Button btnSave, btnLoad;
     SharedPreferences sharedPreferences;
@@ -22,15 +22,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         et = (EditText) findViewById(R.id.etText);
-        btnSave = findViewById(R.id.btnSave);
-        btnLoad = findViewById(R.id.btnLoad);
+     //   btnSave = findViewById(R.id.btnSave);
+     //   btnLoad = findViewById(R.id.btnLoad);
 
-        btnSave.setOnClickListener(this);
-        btnLoad.setOnClickListener(this);
+     //   btnSave.setOnClickListener(this);
+     //   btnLoad.setOnClickListener(this);
+
+        loadText();
 
     }
 
-    @Override
+
+
+ /*   @Override
     public void onClick(View v) {
         switch (v.getId())
         {
@@ -43,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
-    }
+        }
+  */
 
 
     private void saveText() {
@@ -58,5 +63,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String savedText = sharedPreferences.getString(SAVED_TEXT, "");
         et.setText(savedText);
         Toast.makeText(this, "Text loaded", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        saveText();
     }
 }
